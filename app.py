@@ -10,18 +10,11 @@ app = Flask(__name__)
 
 STATUSES = ["Assigned", "Picked Up", "Delivered"]
 DEMO_TEAM = ["John Kibe", "Sasaki Benard", "Joy", "Eunice Wanjiru"]
-SPRINT_DAYS = [
-    ("DAY 01", "Freeze & storyboard", "Build frozen", "complete"),
-    ("DAY 02", "First dry run", "Timing captured", "complete"),
-    ("DAY 03", "Mock panel", "Critique recorded", "complete"),
-    ("DAY 04", "Revise & re-run", "Handoffs rehearsed", "complete"),
-    ("DAY 05", "Submission", "Ready to present", "complete"),
-]
 TEAM_CONTRIBUTIONS = [
-    ("John Kibe", "Product lead + architecture", "Problem framing, Flask/SQLite design, final narrative", 12.5),
-    ("Sasaki Benard", "Dispatcher workflow owner", "Assignment board, status flow, edge-case defense", 11.0),
-    ("Joy", "Retailer experience owner", "Intake flow, trade-offs, roadmap and deck polish", 10.5),
-    ("Eunice Wanjiru", "Rider workflow owner", "Scan confirmation, demo rehearsal, handoffs", 10.0),
+    ("John Kibe", "Product lead + architecture", "Problem framing, Flask/SQLite design, final narrative"),
+    ("Sasaki Benard", "Dispatcher workflow owner", "Assignment board, status flow, edge-case defense"),
+    ("Joy", "Retailer experience owner", "Intake flow, trade-offs, roadmap and deck polish"),
+    ("Eunice Wanjiru", "Rider workflow owner", "Scan confirmation, demo rehearsal, handoffs"),
 ]
 
 
@@ -86,7 +79,6 @@ def dashboard():
         counts=counts,
         team=DEMO_TEAM,
         confirmed_id=confirmed_id,
-        sprint_days=SPRINT_DAYS,
         contributions=TEAM_CONTRIBUTIONS,
     )
 

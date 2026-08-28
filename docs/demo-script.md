@@ -3,8 +3,6 @@
 **0:00–1:00 — Problem / John Kibe**
 Explain that retailers coordinate through WhatsApp and calls, which hides ownership, status, and proof. Name the three roles.
 
-Point to the sprint tracker: this is a completed five-day readiness sprint, not a feature backlog.
-
 **1:00–3:00 — Retailer intake / Joy**
 Create a request for Brian Otieno, add a Nairobi address and item, assign Sasaki Benard. Point out the generated request ID and Assigned state.
 
@@ -20,7 +18,7 @@ Explain Flask, SQLite, server-rendered HTML, and the JSON polling endpoint. Ment
 **8:30–10:00 — Trade-offs and roadmap / Joy**
 Name polling, SQLite, and demo scanning before the panel does. State the accepted reason and next upgrade for each. Close on reliability metrics: assignment time, completion rate, proof capture rate.
 
-Use the team ownership strip to show that all four members completed a named workstream and logged meaningful project time.
+Use the team ownership strip to show that all four members completed a named workstream. The five-day schedule and effort record are documented in the repository, not presented as part of the product demo.
 
 ## Handoffs
 
