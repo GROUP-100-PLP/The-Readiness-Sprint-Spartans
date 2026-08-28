@@ -25,6 +25,7 @@
     </section>
 
     <section class="workspace">
+      {% if confirmed_id %}<div class="confirmation-banner"><span class="confirm-icon">✓</span><div><strong>ORDER CONFIRMED</strong><span>RF-{{ '%04d'|format(confirmed_id) }} scanned successfully · Picked Up</span></div><span class="confirmation-time">JUST NOW</span></div>{% endif %}
       <div class="section-heading"><div><p class="eyebrow">DISPATCH BOARD</p><h2>Today’s handoffs</h2></div><span id="sync-status">Synced just now</span></div>
       <div class="board">
         {% for delivery in deliveries %}
@@ -45,7 +46,7 @@
         <form method="post" action="{{ url_for('create_delivery') }}" class="request-form"><label>Customer name<input name="customer_name" required placeholder="e.g. Brian Otieno"></label><label>Phone number<input name="phone" required placeholder="+254 ..."></label><label class="wide">Delivery address<input name="address" required placeholder="Estate, street, landmark"></label><label class="wide">Item description<input name="item_description" required placeholder="What is going out?">
         </label><label>Assign rider<select name="rider">{% for person in team %}<option>{{ person }}</option>{% endfor %}</select></label><button class="submit">CREATE REQUEST <span>↗</span></button></form>
       </div>
-      <div class="panel scanner"><div class="section-heading"><div><p class="eyebrow">RIDER TOOL</p><h2>Scan to confirm</h2></div><span class="role-tag orange">RIDER</span></div><div class="scan-box"><div class="scan-frame"><span></span><span></span><span></span><span></span><div class="scan-line"></div></div><p>Point camera at order QR</p><small>Demo mode: choose an order below</small></div><form method="post" action="{{ url_for('scan_delivery', delivery_id=deliveries[0].id if deliveries else 1) }}"><button class="scan-button">SCAN ORDER CONFIRMATION ↗</button></form></div>
+      <div class="panel scanner"><div class="section-heading"><div><p class="eyebrow">RIDER TOOL</p><h2>Scan to confirm</h2></div><span class="role-tag orange">RIDER</span></div><div class="scan-box"><div class="scan-frame"><span></span><span></span><span></span><span></span><div class="scan-line"></div></div><p>Point camera at order QR</p><small>Demo mode: choose an order below</small></div><form method="post" action="{{ url_for('scan_delivery', delivery_id=deliveries[0].id if deliveries else 1) }}"><button class="scan-button">SCAN ORDER CONFIRMATION ↗</button></form>{% if deliveries and deliveries[0].confirmation_at %}<div class="scanner-confirmed">✓ CONFIRMED {{ deliveries[0].confirmation_at|replace('T', ' ') }}</div>{% endif %}</div>
     </section>
 
     <footer><span>REFLEX / THE READINESS SPRINT</span><span>TEAM: JOHN KIBE · SASAKI BENARD · JOY · EUNICE WANJIRU</span><span id="clock"></span></footer>

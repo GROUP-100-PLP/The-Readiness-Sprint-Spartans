@@ -30,9 +30,13 @@ def init_db():
             status TEXT NOT NULL DEFAULT 'Assigned',
             rider TEXT,
             created_at TEXT NOT NULL,
-            updated_at TEXT NOT NULL
+            updated_at TEXT NOT NULL,
+            confirmation_at TEXT
         )"""
     )
+    columns = {row[1] for row in connection.execute("PRAGMA table_info(deliveries)").fetchall()}
+    if "confirmation_at" not in columns:
+        connection.execute("ALTER TABLE deliveries ADD COLUMN confirmation_at TEXT")
     count = connection.execute("SELECT COUNT(*) FROM deliveries").fetchone()[0]
     if count == 0:
         now = datetime.now().isoformat(timespec="seconds")
@@ -62,7 +66,8 @@ def dashboard():
     deliveries = [serialize(row) for row in connection.execute("SELECT * FROM deliveries ORDER BY updated_at DESC").fetchall()]
     connection.close()
     counts = {status: sum(delivery["status"] == status for delivery in deliveries) for status in STATUSES}
-    return render_template("index.html", deliveries=deliveries, counts=counts, team=DEMO_TEAM)
+    confirmed_id = request.args.get("confirmed", type=int)
+    return render_template("index.html", deliveries=deliveries, counts=counts, team=DEMO_TEAM, confirmed_id=confirmed_id)
 
 
 @app.post("/deliveries")
@@ -108,14 +113,15 @@ def deliveries_api():
 
 @app.post("/deliveries/<int:delivery_id>/scan")
 def scan_delivery(delivery_id):
+    confirmed_at = datetime.now().isoformat(timespec="seconds")
     connection = get_db()
     connection.execute(
-        "UPDATE deliveries SET status = 'Picked Up', updated_at = ? WHERE id = ?",
-        (datetime.now().isoformat(timespec="seconds"), delivery_id),
+        "UPDATE deliveries SET status = 'Picked Up', confirmation_at = ?, updated_at = ? WHERE id = ?",
+        (confirmed_at, confirmed_at, delivery_id),
     )
     connection.commit()
     connection.close()
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("dashboard", confirmed=delivery_id))
 
 
 init_db()
