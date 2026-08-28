@@ -10,12 +10,6 @@ app = Flask(__name__)
 
 STATUSES = ["Assigned", "Picked Up", "Delivered"]
 DEMO_TEAM = ["John Kibe", "Sasaki Benard", "Joy", "Eunice Wanjiru"]
-TEAM_CONTRIBUTIONS = [
-    ("John Kibe", "Product lead + architecture", "Problem framing, Flask/SQLite design, final narrative"),
-    ("Sasaki Benard", "Dispatcher workflow owner", "Assignment board, status flow, edge-case defense"),
-    ("Joy", "Retailer experience owner", "Intake flow, trade-offs, roadmap and deck polish"),
-    ("Eunice Wanjiru", "Rider workflow owner", "Scan confirmation, demo rehearsal, handoffs"),
-]
 
 
 def get_db():
@@ -79,7 +73,6 @@ def dashboard():
         counts=counts,
         team=DEMO_TEAM,
         confirmed_id=confirmed_id,
-        contributions=TEAM_CONTRIBUTIONS,
     )
 
 

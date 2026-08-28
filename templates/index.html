@@ -49,8 +49,6 @@
       <div class="panel scanner"><div class="section-heading"><div><p class="eyebrow">RIDER TOOL</p><h2>Scan to confirm</h2></div><span class="role-tag orange">RIDER</span></div><div class="scan-box"><div class="scan-frame"><span></span><span></span><span></span><span></span><div class="scan-line"></div></div><p>Point camera at order QR</p><small>Demo mode: choose an order below</small></div><form method="post" action="{{ url_for('scan_delivery', delivery_id=deliveries[0].id if deliveries else 1) }}"><button class="scan-button">SCAN ORDER CONFIRMATION ↗</button></form>{% if deliveries and deliveries[0].confirmation_at %}<div class="scanner-confirmed">✓ CONFIRMED {{ deliveries[0].confirmation_at|replace('T', ' ') }}</div>{% endif %}</div>
     </section>
 
-    <section class="contributors"><div class="section-heading"><div><p class="eyebrow">TEAM OWNERSHIP</p><h2>Every role has a receipt.</h2></div><span>ALL ROLES COMPLETE</span></div><div class="contributor-grid">{% for name, role, work in contributions %}<article class="contributor"><div class="contributor-top"><span class="member-dot">{{ name[0] }}</span><span class="complete-label">✓ COMPLETE</span></div><h3>{{ name }}</h3><strong>{{ role }}</strong><p>{{ work }}</p></article>{% endfor %}</div></section>
-
     <footer><span>REFLEX / THE READINESS SPRINT</span><span>TEAM: JOHN KIBE · SASAKI BENARD · JOY · EUNICE WANJIRU</span><span id="clock"></span></footer>
   </main>
 <script>
