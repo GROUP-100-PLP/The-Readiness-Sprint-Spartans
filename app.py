@@ -9,7 +9,7 @@ DATABASE = BASE_DIR / "reflex.db"
 app = Flask(__name__)
 
 STATUSES = ["Assigned", "Picked Up", "Delivered"]
-DEMO_TEAM = ["John Kibe", "Sasaki Benard", "Joy", "Eunice Wanjiru"]
+RIDERS = ["Rider 01", "Rider 02", "Rider 03"]
 
 
 def get_db():
@@ -37,6 +37,7 @@ def init_db():
     columns = {row[1] for row in connection.execute("PRAGMA table_info(deliveries)").fetchall()}
     if "confirmation_at" not in columns:
         connection.execute("ALTER TABLE deliveries ADD COLUMN confirmation_at TEXT")
+    connection.execute("UPDATE deliveries SET rider = 'Rider 01' WHERE rider NOT IN ('Rider 01', 'Rider 02', 'Rider 03')")
     count = connection.execute("SELECT COUNT(*) FROM deliveries").fetchone()[0]
     if count == 0:
         now = datetime.now().isoformat(timespec="seconds")
@@ -45,9 +46,9 @@ def init_db():
             (customer_name, phone, address, item_description, status, rider, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
             [
-                ("Amina Wekesa", "+254 712 440 118", "Kilimani, Nairobi", "Bluetooth speaker", "Picked Up", "John Kibe", now, now),
-                ("Peter Mwangi", "+254 722 908 331", "Westlands, Nairobi", "Router and ethernet cable", "Assigned", "Sasaki Benard", now, now),
-                ("Faith Njeri", "+254 701 552 670", "South B, Nairobi", "Pharmacy refill pack", "Delivered", "Joy", now, now),
+                ("Amina Wekesa", "+254 712 440 118", "Kilimani, Nairobi", "Bluetooth speaker", "Picked Up", "Rider 01", now, now),
+                ("Peter Mwangi", "+254 722 908 331", "Westlands, Nairobi", "Router and ethernet cable", "Assigned", "Rider 02", now, now),
+                ("Faith Njeri", "+254 701 552 670", "South B, Nairobi", "Pharmacy refill pack", "Delivered", "Rider 03", now, now),
             ],
         )
     connection.commit()
@@ -71,7 +72,7 @@ def dashboard():
         "index.html",
         deliveries=deliveries,
         counts=counts,
-        team=DEMO_TEAM,
+        riders=RIDERS,
         confirmed_id=confirmed_id,
     )
 
@@ -87,7 +88,7 @@ def create_delivery():
             """INSERT INTO deliveries
             (customer_name, phone, address, item_description, status, rider, created_at, updated_at)
             VALUES (?, ?, ?, ?, 'Assigned', ?, ?, ?)""",
-            (*values, request.form.get("rider") or "Sasaki Benard", now, now),
+            (*values, request.form.get("rider") or "Rider 01", now, now),
         )
         connection.commit()
         connection.close()

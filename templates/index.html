@@ -44,12 +44,12 @@
     <section class="lower-grid">
       <div class="panel intake"><div class="section-heading"><div><p class="eyebrow">RETAILER INTAKE</p><h2>Log a request</h2></div><span class="role-tag">RETAILER STAFF</span></div>
         <form method="post" action="{{ url_for('create_delivery') }}" class="request-form"><label>Customer name<input name="customer_name" required placeholder="e.g. Brian Otieno"></label><label>Phone number<input name="phone" required placeholder="+254 ..."></label><label class="wide">Delivery address<input name="address" required placeholder="Estate, street, landmark"></label><label class="wide">Item description<input name="item_description" required placeholder="What is going out?">
-        </label><label>Assign rider<select name="rider">{% for person in team %}<option>{{ person }}</option>{% endfor %}</select></label><button class="submit">CREATE REQUEST <span>↗</span></button></form>
+        </label><label>Assign rider<select name="rider">{% for rider in riders %}<option>{{ rider }}</option>{% endfor %}</select></label><button class="submit">CREATE REQUEST <span>↗</span></button></form>
       </div>
       <div class="panel scanner"><div class="section-heading"><div><p class="eyebrow">RIDER TOOL</p><h2>Scan to confirm</h2></div><span class="role-tag orange">RIDER</span></div><div class="scan-box"><div class="scan-frame"><span></span><span></span><span></span><span></span><div class="scan-line"></div></div><p>Point camera at order QR</p><small>Demo mode: choose an order below</small></div><form method="post" action="{{ url_for('scan_delivery', delivery_id=deliveries[0].id if deliveries else 1) }}"><button class="scan-button">SCAN ORDER CONFIRMATION ↗</button></form>{% if deliveries and deliveries[0].confirmation_at %}<div class="scanner-confirmed">✓ CONFIRMED {{ deliveries[0].confirmation_at|replace('T', ' ') }}</div>{% endif %}</div>
     </section>
 
-    <footer><span>REFLEX / THE READINESS SPRINT</span><span>TEAM: JOHN KIBE · SASAKI BENARD · JOY · EUNICE WANJIRU</span><span id="clock"></span></footer>
+    <footer><span>REFLEX / THE READINESS SPRINT</span><span>DELIVERY CONTROL / NAIROBI KE</span><span id="clock"></span></footer>
   </main>
 <script>
   const status = document.getElementById('sync-status');

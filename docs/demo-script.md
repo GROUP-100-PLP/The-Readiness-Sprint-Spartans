@@ -18,7 +18,7 @@ Explain Flask, SQLite, server-rendered HTML, and the JSON polling endpoint. Ment
 **8:30–10:00 — Trade-offs and roadmap / Joy**
 Name polling, SQLite, and demo scanning before the panel does. State the accepted reason and next upgrade for each. Close on reliability metrics: assignment time, completion rate, proof capture rate.
 
-Use the team ownership strip to show that all four members completed a named workstream. The five-day schedule and effort record are documented in the repository, not presented as part of the product demo.
+Keep the close focused on the delivery workflow. The five-day schedule and effort record are documented in the repository, not presented as part of the product demo.
 
 ## Handoffs
 
