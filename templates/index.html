@@ -25,6 +25,7 @@
     </section>
 
     <section class="workspace">
+      
       {% if confirmed_id %}<div class="confirmation-banner"><span class="confirm-icon">✓</span><div><strong>ORDER CONFIRMED</strong><span>RF-{{ '%04d'|format(confirmed_id) }} scanned successfully · Picked Up</span></div><span class="confirmation-time">JUST NOW</span></div>{% endif %}
       <div class="section-heading"><div><p class="eyebrow">DISPATCH BOARD</p><h2>Today’s handoffs</h2></div><span id="sync-status">Synced just now</span></div>
       <div class="board">
